@@ -18,6 +18,7 @@ public abstract class TimeReactiveSystem : MonoBehaviour
     
     // Forces child classes to define their own time-based behaviour.
     private void Update()
+    // Forces child classes to define their own time-based behaviour.y    private void Update()
     {
         if (timeProvider == null) return;
 
