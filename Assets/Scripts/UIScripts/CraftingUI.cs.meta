@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 606ea211f3495864882bac573333ce15
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - itemDatabase: {instanceID: 0}
+  - recipeListParent: {instanceID: 0}
+  - recipeButtonPrefab: {fileID: 8056671656081740854, guid: 69395b67ffea1364fa190c5da04663af, type: 3}
+  - recipeDetailsText: {instanceID: 0}
+  - craftButton: {instanceID: 0}
+  - messageText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
