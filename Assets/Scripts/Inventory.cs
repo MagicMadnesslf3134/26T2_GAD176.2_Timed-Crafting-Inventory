@@ -7,6 +7,9 @@ using System.Runtime.CompilerServices;
 
 public class Inventory : MonoBehaviour
 {
+    [SerializeField]
+    private Events events;
+
     [SerializeField]  
     private GameObject inventoryMenu;
 
@@ -61,6 +64,24 @@ public class Inventory : MonoBehaviour
             GameObject slotClone = Instantiate(inventorySlot, inventoryItemSection.transform);
             itemSpace.Add(slotClone.GetComponent<ItemSpace>());
             itemSpace[itemSpace.Count - 1].AddItem(itemName, sprite, itemDescription, itemAmount, saleValue);
+        }
+    }
+
+    public void RemoveItem(string itemName, int itemAmount)
+    {
+        
+        for (int i = 0; i < itemSpace.Count; i++)
+        {
+            //Checking if item matches an item already in one of the scripts in the list
+            if (itemSpace[i].containsItem && itemName == itemSpace[i].itemName)
+            {
+                for (int j = 0; j < itemAmount; j++)
+                {
+                    itemSpace[i].RemoveItem();
+                }
+                
+                break;
+            }
         }
     }
     

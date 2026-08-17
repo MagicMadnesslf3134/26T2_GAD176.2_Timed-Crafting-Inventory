@@ -1143,6 +1143,68 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &401665854
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 401665856}
+  - component: {fileID: 401665855}
+  m_Layer: 0
+  m_Name: eventManage
+  m_TagString: Events
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &401665855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401665854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067357bf0ffe5e84991d578058197a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPickUpClock:
+    m_PersistentCalls:
+      m_Calls: []
+  onDropClock:
+    m_PersistentCalls:
+      m_Calls: []
+  onUseItem:
+    m_PersistentCalls:
+      m_Calls: []
+  onItemCrafted:
+    m_PersistentCalls:
+      m_Calls: []
+  onIsDay:
+    m_PersistentCalls:
+      m_Calls: []
+  onIsNight:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &401665856
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401665854}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &433001650
 GameObject:
   m_ObjectHideFlags: 0
@@ -2923,6 +2985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6cfcce4845d4b94488067777d1114e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  events: {fileID: 0}
   inventoryMenu: {fileID: 311055061}
   inventorySlot: {fileID: 644365666368599438, guid: 3a3645c194853bf41af8f7744ea866ba, type: 3}
   inventoryItemSection: {fileID: 2119516375}
@@ -3621,3 +3684,4 @@ SceneRoots:
   - {fileID: 297600491}
   - {fileID: 1146954155}
   - {fileID: 1027754131}
+  - {fileID: 401665856}

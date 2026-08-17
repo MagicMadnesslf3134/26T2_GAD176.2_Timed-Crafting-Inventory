@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 public class ItemSpace : MonoBehaviour
 {
+    private Events events;
+
     public string itemName;
     public Sprite itemSprite;
     string itemDescription;
@@ -44,6 +46,8 @@ public class ItemSpace : MonoBehaviour
 
         GameObject removeButtonGameObject = GameObject.Find("Remove Item");
         removeButton = removeButtonGameObject.GetComponent<Button>();
+
+        events = GameObject.FindGameObjectWithTag("Events").GetComponent<Events>();
     }
 
     
@@ -63,13 +67,36 @@ public class ItemSpace : MonoBehaviour
         //Changing visuals on the screen for items
         //(String)itemCount doesn't work but itemCount.ToString does
         itemCounter.text = itemCount.ToString();
-        itemImage.sprite = itemSprite; 
+        itemImage.sprite = itemSprite;
+
+        //Checking if clock is the item added and sending signal out
+        if(this.itemName == "Clock")
+        {
+            events.onPickUpClock.Invoke();
+        }
+        
     }
     //Reduces itemCount by 1 to be used in other functions e.g. use, sell, discard
     //If item count hits 0 or less removes reference from inventory script list and destroy self
     public void RemoveItem()
     {
             itemCount -= 1;
+
+        //Changing visuals on the screen for items
+        //(String)itemCount doesn't work but itemCount.ToString does
+        itemCounter.text = itemCount.ToString();
+        itemImage.sprite = itemSprite;
+
+        //Changing visuals on the screen for items
+        //(String)itemCount doesn't work but itemCount.ToString does
+        itemCounter.text = itemCount.ToString();
+        itemImage.sprite = itemSprite;
+
+        //Checking if final item drop was Clock then invoking drop clock to remove clock from player UI
+        if (itemCount <= 0 && itemName == "Clock")
+        {
+            events.onDropClock.Invoke();
+        }
         if (itemCount <= 0)
         {
             inventoryScript.RemoveItemSpace(inventoryScript.GetItemSpaceNumber(itemName));
@@ -79,6 +106,9 @@ public class ItemSpace : MonoBehaviour
     //Only has destroy functionality as Effect would be gained from inheritance in an item script
     public void UseItem()
     {
+        //Using item specific Use functions
+        events.onUseItem.Invoke();
+
         //Effect Happens here then
 
         RemoveItem();
