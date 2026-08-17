@@ -1,6 +1,7 @@
 using UnityEngine;
 
-// Controls sun, moon, and ambient lighting based on the current time of day.
+// Controls the sun, moon, and ambient lighting
+// based on the current time of day.
 public class SkyLightingController : TimeReactiveSystem
 {
     [Header("References")]
@@ -23,45 +24,62 @@ public class SkyLightingController : TimeReactiveSystem
 
     protected override void UpdateSystem()
     {
-        if (timeProvider == null) return;
-
         float time = timeProvider.CurrentTime01;
 
         RotateLights(time);
         UpdateLighting(time);
     }
 
-    // Rotates the sun and moon so their positions visually match the time of day.
+    // Rotates the sun and moon so their positions
+    // visually match the time of day.
     private void RotateLights(float time)
     {
         float rotation = (time * 360f) + sunriseOffset;
 
         if (sun != null)
         {
-            sun.transform.rotation = Quaternion.Euler(rotation, 170f, 0f);
+            sun.transform.rotation =
+                Quaternion.Euler(rotation, 170f, 0f);
         }
 
         if (moon != null)
         {
-            moon.transform.rotation = Quaternion.Euler(rotation + 180f, 170f, 0f);
+            moon.transform.rotation =
+                Quaternion.Euler(rotation + 180f, 170f, 0f);
         }
     }
 
-    // Adjusts the brightness of the environment as the day progresses according to the values set in the intensity curves
+    // Adjusts the brightness and colour of the environment.
     private void UpdateLighting(float time)
     {
         if (sun != null)
         {
-            sun.intensity = sunIntensityCurve.Evaluate(time);
-            sun.color = sunColourGradient.Evaluate(time);
+            if (sunIntensityCurve != null)
+            {
+                sun.intensity = sunIntensityCurve.Evaluate(time);
+            }
+
+            if (sunColourGradient != null)
+            {
+                sun.color = sunColourGradient.Evaluate(time);
+            }
         }
 
-        if (moon != null)
+        if (moon != null && moonIntensityCurve != null)
         {
             moon.intensity = moonIntensityCurve.Evaluate(time);
         }
 
-        RenderSettings.ambientIntensity = ambientIntensityCurve.Evaluate(time);
-        RenderSettings.ambientLight = ambientColourGradient.Evaluate(time);
+        if (ambientIntensityCurve != null)
+        {
+            RenderSettings.ambientIntensity =
+                ambientIntensityCurve.Evaluate(time);
+        }
+
+        if (ambientColourGradient != null)
+        {
+            RenderSettings.ambientLight =
+                ambientColourGradient.Evaluate(time);
+        }
     }
 }

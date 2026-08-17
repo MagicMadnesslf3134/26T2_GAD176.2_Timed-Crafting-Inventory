@@ -1,15 +1,22 @@
 using TMPro;
 using UnityEngine;
 
-// Displays the current in-game time when the inventory reports that the player owns a clock.
+// Displays the current in-game time when the inventory system
+// reports that the player owns a clock.
 public class TimeUIController : TimeReactiveSystem
 {
     [Header("UI")]
-    [Tooltip("The clock UI container. Do not assign the GameObject containing this script.")]
-    [SerializeField] private GameObject timeUIRoot;
+    [Tooltip(
+        "The parent object containing the visible clock UI. " +
+        "Do not assign the object containing this script.")]
+    [SerializeField]
+    private GameObject timeUIRoot;
 
-    [SerializeField] private TMP_Text timeText;
+    [SerializeField]
+    private TMP_Text timeText;
 
+    // This value is supplied by the inventory system.
+    // TimeUIController does not decide whether the player has a clock.
     private bool hasClock;
 
     protected override void OnSystemInitialized()
@@ -27,6 +34,7 @@ public class TimeUIController : TimeReactiveSystem
         int hour = timeProvider.CurrentHour;
         int minute = timeProvider.CurrentMinute;
 
+        // Converts 24-hour time into 12-hour clock format.
         string suffix = hour >= 12 ? "PM" : "AM";
 
         int displayHour = hour % 12;
@@ -36,10 +44,12 @@ public class TimeUIController : TimeReactiveSystem
             displayHour = 12;
         }
 
-        timeText.text = $"{displayHour}:{minute:00} {suffix}";
+        timeText.text =
+            $"{displayHour}:{minute:00} {suffix}";
     }
 
-    // This receives the hasClock value announced by the inventory system.
+    // The inventory system calls or invokes this method whenever
+    // its existing hasClock value changes.
     public void OnHasClockChanged(bool newHasClockValue)
     {
         hasClock = newHasClockValue;
@@ -51,8 +61,11 @@ public class TimeUIController : TimeReactiveSystem
         if (timeUIRoot != null)
         {
             timeUIRoot.SetActive(hasClock);
+            return;
         }
-        else if (timeText != null)
+
+        // Fallback if no clock UI parent has been assigned.
+        if (timeText != null)
         {
             timeText.gameObject.SetActive(hasClock);
         }
