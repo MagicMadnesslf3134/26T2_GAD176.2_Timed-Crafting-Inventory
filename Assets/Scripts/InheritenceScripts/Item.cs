@@ -22,7 +22,7 @@ public class Item : MonoBehaviour
     private void Start()
     {
         //Finding the inventory script
-        // = GameObject.Find("Inventory").GetComponent<Inventory>();
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
     }
 
     //Set the item to be pickupable inside of range
