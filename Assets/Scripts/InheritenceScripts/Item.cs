@@ -61,6 +61,6 @@ public class Item : MonoBehaviour
     {
         canPickUp = false;
         inventory.AddItem(itemName, sprite, itemDescription, itemAmount, saleValue);
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

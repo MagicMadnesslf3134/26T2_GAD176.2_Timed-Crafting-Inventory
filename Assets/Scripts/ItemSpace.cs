@@ -124,6 +124,7 @@ public class ItemSpace : MonoBehaviour
     //Provides remove button ability to remove items from this script and removes other listeners prior to prevent other scripts being effected
     public void DisplayInInspector()
     {
+        Debug.Log("DisplayInInspector");
         itemInspectorImage.sprite = itemSprite;
         itemInspectorDescription.text = itemDescription.ToString();
         removeButton.onClick.RemoveAllListeners();
