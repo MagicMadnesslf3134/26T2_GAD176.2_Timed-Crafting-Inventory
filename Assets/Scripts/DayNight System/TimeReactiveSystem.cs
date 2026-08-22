@@ -19,10 +19,15 @@ public abstract class TimeReactiveSystem : MonoBehaviour
 
         timeProvider = provider;
         OnSystemInitialized();
+
+        // Immediately applies the current time instead of waiting one frame.
+        UpdateSystem();
     }
 
     // Child classes can override this to perform setup or subscribe to events.
-    protected virtual void OnSystemInitialized() { }
+    protected virtual void OnSystemInitialized()
+    {
+    }
 
     // Forces child classes to define their own time-based behaviour.
     protected abstract void UpdateSystem();
