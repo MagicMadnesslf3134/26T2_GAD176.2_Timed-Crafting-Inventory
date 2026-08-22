@@ -65,6 +65,10 @@ public class Inventory : MonoBehaviour
             itemSpace.Add(slotClone.GetComponent<ItemSpace>());
             itemSpace[itemSpace.Count - 1].AddItem(itemName, sprite, itemDescription, itemAmount, saleValue);
         }
+        if (itemName == "Clock")
+        {
+            events?.onPickUpClock.Invoke();
+        }
     }
 
     public void RemoveItem(string itemName, int itemAmount)
@@ -79,7 +83,10 @@ public class Inventory : MonoBehaviour
                 {
                     itemSpace[i].RemoveItem();
                 }
-                
+                if (itemName == "Clock")
+                {
+                    events?.onDropClock.Invoke();
+                }
                 break;
             }
         }

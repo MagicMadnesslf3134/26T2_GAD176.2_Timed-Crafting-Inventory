@@ -19,7 +19,6 @@ public class DayNightManager : MonoBehaviour, ITimeProvider
     private float sunsetHour = 18f;
 
     [Header("Connected Systems")]
-    // Stores all systems that need to react to the current time of day.
     [SerializeField]
     private TimeReactiveSystem[] timeSystems;
 
@@ -75,7 +74,6 @@ public class DayNightManager : MonoBehaviour, ITimeProvider
     public bool IsDay => isDay;
     public bool IsNight => !isDay;
 
-    // Other scripts can subscribe to these announcements.
     public event Action SunriseOccurred;
     public event Action SunsetOccurred;
 
@@ -99,11 +97,8 @@ public class DayNightManager : MonoBehaviour, ITimeProvider
     private void Update()
     {
         isNewDay = false;
-
         currentCycleTime += Time.deltaTime;
 
-        // When the cycle reaches the end of the day,
-        // wrap back around to midnight.
         if (currentCycleTime >= cycleLengthSeconds)
         {
             currentCycleTime %= cycleLengthSeconds;
@@ -133,7 +128,6 @@ public class DayNightManager : MonoBehaviour, ITimeProvider
     {
         isDay = CalculateIsDay(CurrentTime01);
 
-        // No announcement is needed if the state has not changed.
         if (isDay == previousIsDay)
         {
             return;
@@ -155,15 +149,12 @@ public class DayNightManager : MonoBehaviour, ITimeProvider
     {
         float currentHour = time01 * 24f;
 
-        // Standard configuration, such as sunrise at 6
-        // and sunset at 18.
         if (sunriseHour < sunsetHour)
         {
             return currentHour >= sunriseHour &&
                    currentHour < sunsetHour;
         }
 
-        // Also supports daytime ranges that cross midnight.
         return currentHour >= sunriseHour ||
                currentHour < sunsetHour;
     }
